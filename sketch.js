@@ -29,11 +29,11 @@ function setup() {
  
 }
 
-function iosAccess() {  //버튼 누르면 동작하는 함수(그냥 따라하기)
+function iosAccess() { 
   DeviceOrientationEvent.requestPermission()
     .then((response) => {
-      if (response === "granted") { //granted를 받으면
-        permission = true; //허가가 true (허가남)
+      if (response === "granted") { 
+        permission = true; 
       }
     })
     .catch(console.error);

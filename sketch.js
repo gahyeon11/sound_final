@@ -1,8 +1,10 @@
 let permission = false; //허가를 위한 변수 (기본은 허가 안남)
 let osc;
 var wave;
+var wave2;
 let button;
-let waves;
+let freq;
+var waves = [];
 
 //let isOn = true;
 function setup() {
@@ -16,9 +18,20 @@ function setup() {
 //     text ("is not a ios",100,100);
 
 //   }
-  wave = new p5.Oscillator();
-  wave.setType('sine');
-  wave.amp(0);
+  for (var i = 0; i < touches.length; i++){
+    waves[i] = new p5.Oscillator();
+    wave[i].setType('sine');
+    wave[i].amp(0);
+  }
+//   wave = new p5.Oscillator();
+//   wave2 = new p5.Oscillator();
+  
+//   wave.setType('sine');
+//   wave2.setType('sine');
+  
+//   wave.amp(0);
+//   wave2.amp(0);
+  
   
  
 }
@@ -48,20 +61,23 @@ function draw() {
 }
 function touchStarted() {
   getAudioContext().resume(); //강제로 사운드 허용하는 문법(구글 및 애플 뚫기)
-  
+  freq = 0;
 for (var i = 0; i < touches.length; i++){ 
   
   if(touches[i].x>0 && touches[i].x<100 ){
-      wave.freq(261);
-      wave.start();
-      wave.amp(0.5,1);
+    freq = 261;
+      wave[1].freq(freq);
+      wave[1].start();
+      wave[1].amp(0.5,1);
 
-   }else if(touches[i].x>101 && touches[i].x<200 ){
-    wave.freq(293);
+   }wave[1].amp(0,1);
+  if(touches[i].x>101 && touches[i].x<200 ){
+    freq = 293;
+     wave[2].freq(freq);
     
-      wave.start();
+      wave[2].start();
      
-      wave.amp(0.5, 1);
+      wave[2].amp(0.5, 1);
    }else if(touches[i].x>201 && touches[i].x<300 ){
     wave.freq(329);
     
@@ -98,6 +114,13 @@ for (var i = 0; i < touches.length; i++){
       wave.start();
      
       wave.amp(0.5, 1);
-   }
+   }//else wave.amp(0, 1);
 }
+  
+}
+function touchEnded(){
+  if(touchStarted()){
+    
+  }
+  
 }

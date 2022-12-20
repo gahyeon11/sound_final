@@ -72,36 +72,51 @@ function touchStarted() {
   freq = 0;
 for (var i = 0; i < touches.length; i++){ 
   freq = 0;
+  print(i);
   if(touches[i].x>0 && touches[i].x<100 ){
      freq = 261;
-     if(freq != 261){
-       wave2.freq(261);
+     if(i==1){
+       
+       wave2.freq(freq);
     
+       wave.start();
       wave2.start();
      
       wave2.amp(0.5, 1);
-     }else wave.freq(261);
+     }else {
+       wave.freq(freq);
     
-      wave.start();
+       wave.start();
      
-      wave.amp(0.5, 1);
+       wave.amp(0.5, 1);}
+       wave.amp(0,1);
+       wave2.amp(0,1);
    
-   }else wave.amp(0,1);
+   }
   if(touches[i].x>101 && touches[i].x<200 ){
-       freq = 293;
-     if(freq != 293){
-       wave2.freq(293);
+     freq = 293;
     
+     if(i==1){
+       
+       wave2.freq(freq);
+    
+       wave.start();
       wave2.start();
      
       wave2.amp(0.5, 1);
-     }else wave.freq(293);
+     }else {
+       wave.freq(freq);
     
-      wave.start();
+       wave.start();
      
-      wave.amp(0.5, 1);
+       wave.amp(0.5, 1);
+     }
+    
+       wave.amp(0,1);
+       wave2.amp(0,1);
    
-   }else wave.amp(0,1);
+   } 
+  
   if(touches[i].x>201 && touches[i].x<300 ){
     wave.freq(329);
     

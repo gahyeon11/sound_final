@@ -2,19 +2,20 @@ let permission = false; //허가를 위한 변수 (기본은 허가 안남)
 let osc;
 var wave;
 let button;
+let waves;
 
 //let isOn = true;
 function setup() {
   createCanvas(800, 400);
-  if( typeof DeviceMotionEvent.requestPermission == "function"){
-    background(255, 0, 0);
-    button = createButton("Click to ios sensor")
-    button.mousePressed(iosAccess); 
-  }else{
-    background(0, 255, 0);
-    text ("is not a ios",100,100);
+//   if( typeof DeviceMotionEvent.requestPermission == "function"){
+//     background(255, 0, 0);
+//     button = createButton("Click to ios sensor")
+//     button.mousePressed(iosAccess); 
+//   }else{
+//     background(0, 255, 0);
+//     text ("is not a ios",100,100);
 
-  }
+//   }
   wave = new p5.Oscillator();
   wave.setType('sine');
   wave.amp(0);
@@ -22,17 +23,10 @@ function setup() {
  
 }
 
-function iosAccess() {
-  DeviceOrientationEvent.requestPermission()
-.then((response) => {
-if (response === "granted"){
-  permission = true;
-                          
-}}).catch (console.error);
-}
+
 
 function draw() {
-  if (!permission) return;
+//  // if (!permission) return;
   background(220);
   fill(255,0,0);
   rect(0,0,100,250);
@@ -51,81 +45,59 @@ function draw() {
   fill(255,0,20);
   rect(700,0,100,250);
 
+}
+function touchStarted() {
+  getAudioContext().resume(); //강제로 사운드 허용하는 문법(구글 및 애플 뚫기)
   
-
-  if(mouseIsPressed){
-    if(mouseX>0 && mouseX<100 ){
+for (var i = 0; i < touches.length; i++){ 
+  
+  if(touches[i].x>0 && touches[i].x<100 ){
       wave.freq(261);
       wave.start();
       wave.amp(0.5,1);
 
-   }else if(mouseX>101 && mouseX<200 ){
+   }else if(touches[i].x>101 && touches[i].x<200 ){
     wave.freq(293);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>201 && mouseX<300 ){
+   }else if(touches[i].x>201 && touches[i].x<300 ){
     wave.freq(329);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>301 && mouseX<400 ){
+   }else if(touches[i].x>301 && touches[i].x<400 ){
     wave.freq(349);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>401 && mouseX<500 ){
+   }else if(touches[i].x>401 && touches[i].x<500 ){
     wave.freq(391);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>501 && mouseX<600 ){
+   }else if(touches[i].x>501 && touches[i].x<600 ){
     wave.freq(440);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>601 && mouseX<700 ){
+   }else if(touches[i].x>601 && touches[i].x<700 ){
     wave.freq(493);
     
       wave.start();
      
       wave.amp(0.5, 1);
-   }else if(mouseX>701 && mouseX<800 ){
+   }else if(touches[i].x>701 && touches[i].x<800 ){
     wave.freq(523);
     
       wave.start();
      
       wave.amp(0.5, 1);
    }
-  
-  }else{wave.amp(0, 1);}
-
-  textSize(72); //텍스트 픽셀 크기 72
-  text(rotationX, 400, 300);
-  
 }
-
-///function mousePressed(){
-
-///    if(isOn == true) isOn = false;
-///    else isOn = true;
-  
-///}
-///function toggle() {
-///if (!playing) 
-///{
-///wave.start();
-///wave.amp(0.5, 1);
-///playing = true
-///;
-///} else
-///{
-///wave.amp(0, 1);
-///playing = false;
-///}
-///}
+}
